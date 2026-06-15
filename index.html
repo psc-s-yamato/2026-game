@@ -2,29 +2,77 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>深海せんむ</title>
+  <title>無限洞窟</title>
   <style>
-    html, body {
+    html,
+    body {
       margin: 0;
-      padding: 0;
       width: 100%;
       height: 100%;
+      height: 100dvh;
       overflow: hidden;
+      overscroll-behavior: none;
+      touch-action: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      background: #000;
+      position: fixed;
+      inset: 0;
     }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      box-sizing: border-box;
+    }
+
     #app {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       height: 100%;
-      margin: 0;
+      max-width: 100%;
+      max-height: 100%;
     }
+
+    /* ボスGIF：canvasの上に重ねる */
+    .boss-gif {
+      position: absolute;
+      pointer-events: none;
+      display: none;
+      image-rendering: auto;
+    }
+
+    /* 論理解像度 800×600 をアスペクト比維持で拡大縮小し、余白は body の黒背景 */
     #game-canvas {
       display: block;
+      width: min(100%, calc(100dvh * 4 / 3));
+      height: min(100dvh, calc(100% * 3 / 4));
+      max-width: min(100vw, calc(100dvh * 4 / 3));
+      max-height: min(100dvh, calc(100vw * 3 / 4));
+      outline: none;
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #game-canvas:focus,
+    #game-canvas:focus-visible {
+      outline: none;
     }
   </style>
-  <script type="module" crossorigin src="/2026-game/assets/index.js"></script>
+  <script type="module" crossorigin src="/assets/index.js"></script>
 </head>
 <body>
   <div id="app"></div>
